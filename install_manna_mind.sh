@@ -15,6 +15,9 @@ sudo timedatectl set-timezone UTC
 # Step 1: Ask for device token if doesn't find
 token=$(cat token.txt 2>/dev/null) || read -p "Please enter your token: " token
 
+# remove token file
+trap "rm ./token.txt" EXIT
+
 # Create URL with the token
 FULL_SYNC_URL="${DEVICE_SYNC_URL}/$token?force_config=true"
 

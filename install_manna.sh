@@ -17,6 +17,8 @@ else
     echo "Encryption not found, Insert at least 64GB empty USB stick for encryption"
     read -rp "Press 1 for encryption " USER_INPUT
     [[ "$USER_INPUT" == "1" ]] && sudo ./encrypt_image.sh
+
+    exit 1
 fi
 
 if [ -f $CONFIG_FILE ]; then
