@@ -15,15 +15,17 @@ if [ $CHECK_ENCRYPTION -eq 1 ]; then
     echo "Encryption found"
 else
     echo "Encryption not found, Insert at least 64GB empty USB stick for encryption"
-    read -rp "Press 1 for encryption" USER_INPUT
+    read -rp "Press 1 for encryption " USER_INPUT
     [[ "$USER_INPUT" == "1" ]] && sudo ./encrypt_image.sh
 fi
 
 if [ -f $CONFIG_FILE ]; then
     echo "manna installed"
+    read -rp "Press 3 for uninstall manna MIND " UNINSTALL_INPUT
+    [[ "$UNINSTALL_INPUT" == "3" ]] && ./uninstall_manna_mind.sh
 else
-    echo "manna is not install, Do you want to install manna mind?"
-    read -rp "Press 2 for installation" INSTALLATION_INPUT
+    echo "manna MIND is not installed, Do you want to install manna MIND?"
+    read -rp "Press 2 for installation manna MIND " INSTALLATION_INPUT
     if [[ "$INSTALLATION_INPUT" == "2" ]]; then
         ./register_manna_mind.sh
         ./install_manna_mind.sh
