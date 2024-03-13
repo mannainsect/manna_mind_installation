@@ -82,4 +82,6 @@ cd ${MANNA_DIR}/scripts/
 sudo ./configure_hotspot.sh
 
 # Reboot to get env variables from /etc/environment
-echo "Manna Mind installed succesfully"
+echo "Manna Mind installed succesfully - rebooting in 5 seconds"
+sleep 5
+sudo reboot
