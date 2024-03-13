@@ -1,10 +1,13 @@
 #!/bin/bash
 
+MIND_SCRIPT_PATH="/home/pi/manna_mind_installation"
 CHECK_ENCRYPTION=$(lsblk -o type | grep crypt | wc -l)
 CONFIG_FILE="/etc/manna/device_config.json"
 ENCRYPT_SERVICE_STATUS=$(sudo systemctl status cfg_SD_crfs.service 2>/dev/null)
 ENCRYPT_SCRIPT_PID=$(pidof -x "mk_encr_sd_rfs.sh")
 
+
+cd "$MIND_SCRIPT_PATH"
 
 if [[ -n $ENCRYPT_SERVICE_STATUS ]] || [[ -n $ENCRYPT_SCRIPT_PID ]]; then
     echo "Encryption in progress, exiting"
