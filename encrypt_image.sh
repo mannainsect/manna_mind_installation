@@ -31,6 +31,6 @@ done
 
 format_usb_stick
 
-sudo ./$FILE_NAME -x $EXTERNAL_DEVICE >/dev/null 2>&1 &
+sudo ./$FILE_NAME >/dev/null &
 
 echo "encryption started. It will take around 2 hours"
