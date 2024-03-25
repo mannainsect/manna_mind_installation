@@ -86,7 +86,7 @@ then
     EXT_DEV="/dev/sda"
 fi
 
-SRC_RFS_PART="/dev/sda${RFS_SRC_PART_NUM}"
+SRC_RFS_PART="/dev/mmcblk0p${RFS_SRC_PART_NUM}"
 EXT_TMP_PART="${EXT_DEV}1"
 crfsvol="/mnt/cryptrfs"
 tmpvol="/mnt/tmproot"
@@ -157,7 +157,7 @@ cp /etc/ssh/*_key* ${crfsvol}/etc/ssh
 
 # Mount the boot partition in a safe place
 mkdir -p /mnt/tmpboot
-mount /dev/sda1 /mnt/tmpboot || exit
+mount /dev/mmcblk0p1 /mnt/tmpboot || exit
 
 # Remove the plaintext key now
 rm /run/key.bin
@@ -299,7 +299,7 @@ bootopt=""
 
 kf="/mnt/tmpboot/kernel${vn}.img"
 mkdir -p /mnt/tmpboot
-mount /dev/sda1 /mnt/tmpboot
+mount /dev/mmcblk0p1 /mnt/tmpboot
 
 if [ -n "${version}" ]
 then
@@ -463,7 +463,7 @@ echo "done."
 
 # Mount the boot partition in a safe place
 mkdir -p /mnt/tmpboot
-mount /dev/sda1 /mnt/tmpboot || exit
+mount /dev/mmcblk0p1 /mnt/tmpboot || exit
 
 # Find out if config.txt contains the "cmdline=" directive in lieu of the
 # cmdline.txt file
