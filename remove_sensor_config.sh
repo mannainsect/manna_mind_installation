@@ -10,7 +10,7 @@ echo -e "$SENSOR_CODE_LIST\n"
 while true; do
     read -p "Insert sensor code name (exm: SCD30_1): " USER_INPUT
     USER_INPUT=${USER_INPUT^^}
-    if [[ "${SENSOR_CODE_LIST,,}" == *"$USER_INPUT_LOWER"* ]]; then
+    if echo "$SENSOR_CODE_LIST" | grep -q -w "$USER_INPUT"; then
         break
     else
         echo "Invalid sensor code. Please try again."
