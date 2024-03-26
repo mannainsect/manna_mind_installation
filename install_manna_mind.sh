@@ -77,6 +77,9 @@ pip3 install -r ${MANNA_DIR}/requirements.txt
 cd ${MANNA_DIR}/systemd_configurations/
 "${MANNA_DIR}${SYSTEMD_SCRIPT_PATH}"
 
+# configure ft232h
+python3 ${MANNA_DIR}/apps/measure_i2c/generate_serial_num_FT232H.py -n
+
 # hotspot configuration
 cd ${MANNA_DIR}/scripts/
 sudo ./configure_hotspot.sh
