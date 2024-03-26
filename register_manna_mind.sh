@@ -103,11 +103,15 @@ validate_vint() {
     return 0
 }
 
+create_token() {
+    while ! get_token; do
+        res_error=$(echo "$access_token_response" | jq -r '.detail')
+        show_error_text "$res_error"
+    done
+}
+
 # need token for creating device
-while ! get_token; do
-    res_error=$(echo "$access_token_response" | jq -r '.detail')
-    show_error_text "$res_error"
-done
+create_token
 
 # asking version number
 while ! version=$(prompt_input "Version 1.0 or 1.5(required)") ||
@@ -182,7 +186,7 @@ while ! create_device_to_mongodb; do
 
     if [[ "$device_creation_error" == "$not_authorize" ]]; then
         show_error_text "$device_creation_error"
-        exit 1
+        create_token
     fi
 
     if [[ "$device_creation_error" == "$device_exist" ]]; then
