@@ -15,9 +15,6 @@ sudo timedatectl set-timezone UTC
 # Step 1: Ask for device token if doesn't find
 token=$(cat token.txt 2>/dev/null) || read -p "Please enter your token: " token
 
-# remove token file
-trap "rm ./token.txt" EXIT
-
 # Create URL with the token
 FULL_SYNC_URL="${DEVICE_SYNC_URL}/$token?force_config=true"
 
@@ -50,6 +47,9 @@ else
     echo "The folder does not exist."
     exit 1
 fi
+
+# Remove token file what created from register device
+rm ./token.txt
 
 # Create Manna config directory and file to /etc/manna/device_config.json
 sudo mkdir "${CONFIG_DIR}"

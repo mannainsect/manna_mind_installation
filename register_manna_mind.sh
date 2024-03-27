@@ -120,7 +120,7 @@ while ! version=$(prompt_input "Version 1.0 or 1.5(required)") ||
 done
 
 # asking device code
-while ! device_code=$(prompt_input "device_code(exm:FIMANNA0001)") ||
+while ! device_code=$(prompt_input "device_code(e.g. FIMANNA0001)") ||
     [ -z "$device_code" ]; do
     show_error_text "Device Code is empty"
 done
@@ -128,13 +128,13 @@ done
 # ruuvi validation if insert ruuvi mac
 while true; do
     data_insertion=$([[ "$version" == "1.0" ]] && echo "required" || echo "optional")
-    ruuvi_macs_input=$(prompt_input "ruuvi_macs (separated by spaces or commas)($data_insertion)")
+    ruuvi_macs_input=$(prompt_input "Ruuvi MACs (separated by spaces or commas, e.g. DCD84C0D85ED,ACE84C0D45EA) (required)")
 
-    if [[ "$version" == "1.0" && -z "$ruuvi_macs_input" ]]; then
-        show_error_text "ruuvi_macs_input can't be empty for version 1.0"
+    if [[ -z "$ruuvi_macs_input" ]]; then
+        show_error_text "ruuvi macs input can't be empty"
         continue
     fi
-
+    
     invalid_mac=false
 
     # Split the input string by spaces or commas
@@ -149,6 +149,8 @@ while true; do
     done
 
     if [[ "$invalid_mac" == "false" ]]; then
+        # Add "ruuvi_" prefix before each Ruuvi MAC address
+        ruuvi_macs_input=$(echo "${macs[@]/#/ruuvi_}" | tr ' ' ',')
         break
     fi
 done
